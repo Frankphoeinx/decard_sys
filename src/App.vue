@@ -26,7 +26,6 @@
         Добавить точки
       </button>
     </div>
-    <pre class="fixed">{{ changedCoordinates }}{{ tempVar }}</pre>
     <div class="constructor__canvas" ref="constructor__canvas">
       <button
         class="constructor__controler__delete constructor__controler__delete_topright"
@@ -41,7 +40,6 @@
 
 <script>
 const points = require("@/coordinates.json");
-// import points from "@/coordinates.json";
 export default {
   name: "App",
   components: {
@@ -136,11 +134,11 @@ export default {
             (this.coordinates[i].x - center.x) /
               this.lineDistance(center, this.coordinates[i])
           );
-
-          // if (this.coordinates[i].y > center.y) {
-          //   this.coordinates[i].angle =
-          //     Math.PI + Math.PI - this.coordinates[i].angle;
-          // }
+          // Проблема в вычислении angle, в некоторых случаях происходит пересечение линий, если заккоментировать пересечений не будет, но порядко сильно нарушается
+          if (this.coordinates[i].y > center.y) {
+            this.coordinates[i].angle =
+              Math.PI + Math.PI - this.coordinates[i].angle;
+          }
         }
 
         // sort by angle
