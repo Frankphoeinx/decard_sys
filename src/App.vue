@@ -26,7 +26,7 @@
         Добавить точки
       </button>
     </div>
-    <!--    <pre class="fixed">{{ changedCoordinates }}{{ tempVar }}</pre>-->
+    <pre class="fixed">{{ changedCoordinates }}{{ tempVar }}</pre>
     <div class="constructor__canvas" ref="constructor__canvas">
       <button
         class="constructor__controler__delete constructor__controler__delete_topright"
@@ -107,8 +107,11 @@ export default {
       }
       if (clearStorage) {
         localStorage.clear();
+        this.coordinates = [];
+        this.changedCoordinates = [];
       }
     },
+
     //Drawing figure
     figureDrawing() {
       // this.points = JSON.parse(this.points);
@@ -125,24 +128,7 @@ export default {
         this.ctx.fillStyle = "transparent";
 
         // calculate max and min x and y
-        var minX = this.coordinates[0].x;
-        var maxX = this.coordinates[0].x;
-        var minY = this.coordinates[0].y;
-        var maxY = this.coordinates[0].y;
-
-        for (let i = 1; i < this.coordinates.length; i++) {
-          if (this.coordinates[i].x < minX) minX = this.coordinates[i].x;
-          if (this.coordinates[i].x > maxX) maxX = this.coordinates[i].x;
-
-          if (this.coordinates[i].y < minY) minY = this.coordinates[i].y;
-          if (this.coordinates[i].y > maxY) maxY = this.coordinates[i].y;
-        }
-
-        // choose a "central" point
-        var center = {
-          x: minX + (maxX - minX) / 2,
-          y: minY + (maxY - minY) / 2
-        };
+        let center = this.maxAndMinParams();
         //
         // precalculate the angles of each point to avoid multiple calculations on sort
         for (let i = 0; i < this.coordinates.length; i++) {
@@ -151,10 +137,10 @@ export default {
               this.lineDistance(center, this.coordinates[i])
           );
 
-          if (this.coordinates[i].y > center.y) {
-            this.coordinates[i].angle =
-              Math.PI + Math.PI - this.coordinates[i].angle;
-          }
+          // if (this.coordinates[i].y > center.y) {
+          //   this.coordinates[i].angle =
+          //     Math.PI + Math.PI - this.coordinates[i].angle;
+          // }
         }
 
         // sort by angle
@@ -186,6 +172,26 @@ export default {
         this.ctx.stroke();
         this.ctx.fill();
       }
+    },
+    maxAndMinParams() {
+      var minX = this.coordinates[0].x,
+        maxX = this.coordinates[0].x,
+        minY = this.coordinates[0].y,
+        maxY = this.coordinates[0].y;
+
+      for (let i = 1; i < this.coordinates.length; i++) {
+        if (this.coordinates[i].x < minX) minX = this.coordinates[i].x;
+        if (this.coordinates[i].x > maxX) maxX = this.coordinates[i].x;
+
+        if (this.coordinates[i].y < minY) minY = this.coordinates[i].y;
+        if (this.coordinates[i].y > maxY) maxY = this.coordinates[i].y;
+      }
+
+      // choose a "central" point
+      return {
+        x: minX + (maxX - minX) / 2,
+        y: minY + (maxY - minY) / 2
+      };
     },
     lineDistance(point1, point2) {
       var xs = 0;
