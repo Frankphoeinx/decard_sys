@@ -5,7 +5,7 @@
     <label class="constructor__controler__input">
       <span>X:</span>
       <div>
-        <input type="text" v-model.trim="formItem.x" />
+        <input type="number" v-model.trim="formItem.x" />
         <span>Макс. допустимое число {{ limit.x }}</span>
       </div>
       <div class="constructor__controler__alert" v-if="formItem.invalid.x">
@@ -15,7 +15,7 @@
     <label class="constructor__controler__input">
       <span>Y:</span>
       <div>
-        <input type="text" v-model.trim="formItem.y" />
+        <input type="number" v-model.trim="formItem.y" />
         <span>Макс. допустимое число {{ limit.y }}</span>
       </div>
       <div class="constructor__controler__alert" v-if="formItem.invalid.y">

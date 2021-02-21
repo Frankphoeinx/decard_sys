@@ -66,10 +66,7 @@ export default {
       let valid = true;
       this.newCoordinates.forEach(item => {
         Object.keys(item).forEach(key => {
-          if (
-            !item[key] ||
-            (typeof +item[key] != "number" && key != "invalid")
-          ) {
+          if (!item[key]) {
             item.invalid[key] = true;
             valid = false;
           } else {
@@ -305,6 +302,7 @@ export default {
       display: flex;
       align-items: center;
       margin-top: 10px;
+      flex-wrap: wrap;
       span {
         padding-left: 10px;
       }
