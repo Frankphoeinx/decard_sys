@@ -315,6 +315,11 @@ export default {
       -moz-border-radius: 5px;
       border-radius: 5px;
       cursor: pointer;
+      outline: none;
+      transition: 0.2s;
+      &:active {
+        transform: scale(0.9);
+      }
       &_topright {
         position: fixed;
         top: 10px;
