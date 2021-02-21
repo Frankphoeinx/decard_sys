@@ -161,14 +161,7 @@ export default {
         this.coordinates = this.coordinates.sort(function(a, b) {
           return a.angle - b.angle;
         });
-        this.coordinates.forEach((item, index) => {
-          let t = {
-            start: item,
-            end: this.coordinates[index + 1]
-          };
-          this.tempVar.push(t);
-          console.log(t);
-        });
+
         // Draw shape
         this.ctx.beginPath();
 
