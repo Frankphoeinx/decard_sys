@@ -134,11 +134,11 @@ export default {
               this.lineDistance(center, this.coordinates[i])
           );
           // Проблема в вычислении angle, в некоторых случаях происходит пересечение линий, если заккоментировать пересечений не будет, но порядко сильно нарушается
-          if (this.coordinates[i].y > center.y && this.firstAngleY) {
-            this.coordinates[i].angle =
-              Math.PI + Math.PI - this.coordinates[i].angle;
-            this.firstAngleY = false;
-          }
+          // if (this.coordinates[i].y > center.y && this.firstAngleY) {
+          //   this.coordinates[i].angle =
+          //     Math.PI + Math.PI - this.coordinates[i].angle;
+          //   this.firstAngleY = false;
+          // }
         }
 
         // sort by angle
