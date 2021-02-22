@@ -79,8 +79,6 @@ export default {
       if (this.validForms()) {
         this.newCoordinates.forEach(item => {
           delete item.invalid;
-          item.x = +item.x;
-          item.y = +item.y;
           this.changedCoordinates.push(item);
         });
         this.newCoordinates = [];
